@@ -1,14 +1,7 @@
 import gymnasium as gym
-import math
-import random
-import matplotlib
-import matplotlib.pyplot as plt
-from collections import namedtuple, deque
-from itertools import count
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.functional as F
 
 # 注册新的 CartPole 环境
@@ -60,9 +53,14 @@ while not done:
         state = torch.tensor(state, dtype=torch.float32).unsqueeze(0)
         action = model(state).max(1)[1].view(1, 1)
         print(action)
-        print(type(action))
+        # print(type(action))
     state, reward, terminated, truncated, _ = env.step(action.item())
 
+    if terminated:
+        print("terminated")
+
+    if truncated:
+        print("truncated")
     # done是终止或者被截断的标志
     done = terminated or truncated
 

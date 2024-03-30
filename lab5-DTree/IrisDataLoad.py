@@ -26,3 +26,7 @@ class MyIrisDataLoader:
 
         print(self.labels)
         print(self.attributes)
+
+
+loader = MyIrisDataLoader()
+loader.print_iris_data_info()
