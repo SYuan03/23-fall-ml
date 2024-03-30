@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 class MyKMeans:
     # n_clusters: 聚类中心个数， 默认为 8
     # max_iter: 最大迭代次数， 默认为 400
-    # tol: 质心移动距离小于该值时，停止迭代， 默认为 0.0001
     def __init__(self, n_clusters: int = 8, max_iter: int = 400, init_gen_center_way: str = 'kmeans'):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
@@ -118,15 +117,15 @@ class MyKMeans:
 
 if __name__ == '__main__':
     # 读取图片， 转换为RGB格式
-    img_name = 'cyt'
+    img_name = 'peiqi'
     img = cv2.imread(img_name + '.png')
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     # 显示图片
-    plt.figure(figsize=(10, 10))
-    plt.imshow(img)
+    # plt.figure(figsize=(10, 10))
+    # plt.imshow(img)
     # plt.axis('off') # 不显示坐标轴
-    plt.show()
+    # plt.show()
 
     # 获取图片的高和宽
     w, h = img.shape[0], img.shape[1]
@@ -138,8 +137,9 @@ if __name__ == '__main__':
     # img本来是w * h * 3的三维矩阵，现在转换为w * h行，3列的二维矩阵
     img = img.reshape((w * h, 3))
 
-    n_clusters_ = 5
-    max_iter_ = 200
+    n_clusters_ = 9
+    max_iter_ = 200 # 因为后面聚类有判断是如果聚类中心不变了就停止，所以设大一点无所谓
+
     # 聚类
     kmeans = MyKMeans(n_clusters_, max_iter_, init_gen_center_way='kmeans')
     kmeans.fit(img)
@@ -166,9 +166,10 @@ if __name__ == '__main__':
     output = output * 255
 
     # 显示图片
-    plt.figure(figsize=(10, 10))    # 设置窗口大小
-    plt.imshow(output.astype(np.uint8))
-    # plt.axis('off') # 不显示坐标轴
-    plt.show()
+    # plt.figure(figsize=(10, 10))    # 设置窗口大小
+    # plt.imshow(output.astype(np.uint8))
+    # # plt.axis('off') # 不显示坐标轴
+    # plt.show()
     # 保存图片到dogcat目录下
     cv2.imwrite(img_name + '/' + img_name + '_kmeans_' + str(n_clusters_) + '.png', output)
+

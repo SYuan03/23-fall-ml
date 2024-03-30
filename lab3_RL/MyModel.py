@@ -1,8 +1,7 @@
 import math
-
-import gymnasium as gym
-from gymnasium.envs.classic_control import CartPoleEnv
 from typing import Optional
+
+from gymnasium.envs.classic_control import CartPoleEnv
 
 
 # 创建一个新的 CartPole 环境类，继承自原始的 CartPoleEnv
@@ -17,7 +16,6 @@ class CustomCartPoleEnv(CartPoleEnv):
 
         # 修改 theta_threshold_radians 参数为 ±15度
         self.theta_threshold_radians = 15 * 2 * math.pi / 360
-
 
 # # 注册新的 CartPole 环境
 # gym.envs.register(
